@@ -1,3 +1,4 @@
+/* eslint-disable consistent-return */
 import Vue from 'vue';
 import VueRouter from 'vue-router';
 import VueResource from 'vue-resource';
@@ -13,7 +14,7 @@ Vue.use(VueResource);
 Vue.use(VueRouter, axios);
 
 axios.defaults.baseURL = 'https://api.themoviedb.org/3';
-axios.defaults.headers.post['Content-Type'] = 'application/json;charset=utf-8';
+axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
 axios.defaults.headers.post['Access-Control-Allow-Origin'] = '*';
 
 Vue.filter('formatDate', (value) => {
