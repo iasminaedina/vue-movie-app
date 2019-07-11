@@ -22,27 +22,27 @@
 </template>
 
 <script>
-  import MovieItem from '../movieItem/movieItem.vue';
+import MovieItem from '../movieItem/movieItem.vue';
 
-  export default {
-    props: ['id'],
-    components: { MovieItem },
+export default {
+  props: ['id'],
+  components: { MovieItem },
 
-    methods: {
-      closeModal(e) {
+  methods: {
+    closeModal(e) {
+      this.$emit('close');
+    }
+  },
+
+  created(){
+    //close modal when pressing escape
+    window.addEventListener('keyup', function(e){
+      if (e.keyCode == 27) {
         this.$emit('close');
       }
-    },
-
-    created(){
-      //close modal when pressing escape
-      window.addEventListener('keyup', function(e){
-        if (e.keyCode == 27) {
-          this.$emit('close');
-        }
-      }.bind(this));
-    }
+    }.bind(this));
   }
+};
 </script>
 
 <style scoped lang="scss">
