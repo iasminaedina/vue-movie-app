@@ -12,9 +12,9 @@ A simple movie app in Vuejs
 # install dependencies
 npm install
 
-# serve with hot reload at localhost:8080
+# serve with reload at localhost:8080
 npm run serve
 
-# build for production with minification
+# build for production
 npm run build
 ```
