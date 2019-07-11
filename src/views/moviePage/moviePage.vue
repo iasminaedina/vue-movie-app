@@ -14,6 +14,7 @@ export default {
 
 <style scoped>
   .container {
-    height: 900px;
+    min-height: 900px;
+    padding-top: 50px;
   }
 </style>
