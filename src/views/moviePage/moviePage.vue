@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import MovieItem from '@/components/movieItem/movieItem.vue';
+import MovieItem from '../../components/movieItem/movieItem.vue';
 
 export default {
   components: { MovieItem },

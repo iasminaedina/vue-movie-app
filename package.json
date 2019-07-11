@@ -40,21 +40,27 @@
     "chai": "^4.1.2",
     "eslint": "^5.16.0",
     "eslint-plugin-vue": "^5.0.0",
+    "identity-obj-proxy": "^3.0.0",
     "jest": "^24.8.0",
     "node-sass": "^4.12.0",
     "sass-loader": "^7.1.0",
     "vue-jest": "^3.0.4",
-    "vue-template-compiler": "^2.6.10"
+    "vue-template-compiler": "^2.6.10",
+    "vue-test-utils": "^1.0.0-beta.11"
   },
   "jest": {
     "moduleFileExtensions": [
       "js",
-      "json",
       "vue"
     ],
     "transform": {
-      ".*\\.(vue)$": "vue-jest",
-      "^.+\\.(js|jsx)?$": "<rootDir>/node_modules/babel-jest"
+      "^.+\\.(js|jsx)?$": "<rootDir>/node_modules/babel-jest",
+      "^.+\\.js$": "<rootDir>/node_modules/babel-jest",
+      ".*\\.(vue)$": "<rootDir>/node_modules/vue-jest"
+    },
+    "moduleNameMapper": {
+      "^vue$": "vue/dist/vue.common.js",
+      "^.+\\.(css|less|scss)$": "identity-obj-proxy"
     }
   },
   "eslintConfig": {

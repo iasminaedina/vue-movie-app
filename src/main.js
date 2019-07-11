@@ -10,23 +10,26 @@ import App from './App.vue';
 import router from './router';
 import store from './store';
 
-window.eventHub = new Vue();
+export const eventHub = new Vue();
 
 Vue.config.productionTip = false;
 Vue.use(VueResource);
 Vue.use(VueRouter, axios);
 Vue.use(Toasted);
 
+// http presets
 axios.defaults.baseURL = 'https://api.themoviedb.org/3';
 axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
 axios.defaults.headers.post['Access-Control-Allow-Origin'] = '*';
 
+// a modifier for showing movie release date in a prettier way
 Vue.filter('formatDate', (value) => {
   if (value) {
     return moment(String(value)).format('DD/MM/YYYY');
   }
 });
 
+// a customised notification plugin which fired when movies are added/removed from favorites
 Vue.toasted.register('myToast', message => message, {
   type: 'success',
   theme: 'bubble',

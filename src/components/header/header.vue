@@ -78,7 +78,7 @@
 </template>
 
 <script>
-
+import { eventHub } from '../../main.js';
 export default {
   data() {
     return {

@@ -32,10 +32,11 @@
 </template>
 
 <script>
+import { eventHub } from './main.js';
 import storage from './storage';
-import Footer from '@/components/footer/footer.vue';
-import Header from '@/components/header/header.vue';
-import MovieModal from '@/components/movieModal/movieModal.vue';
+import Footer from './components/footer/footer.vue';
+import Header from './components/header/header.vue';
+import MovieModal from './components/movieModal/movieModal.vue';
 
 export default {
   name: 'app',

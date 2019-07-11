@@ -29,6 +29,7 @@
 
 <script>
 import axios from 'axios';
+import { eventHub } from '../../main.js';
 import storage from '../../storage';
 
 export default {

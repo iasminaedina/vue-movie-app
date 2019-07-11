@@ -6,7 +6,7 @@
 
 <script>
 import storage from '../../storage';
-import MoviesList from '@/components/moviesList/moviesList.vue';
+import MoviesList from '../../components/moviesList/moviesList.vue';
 
 export default {
   components: { MoviesList },
