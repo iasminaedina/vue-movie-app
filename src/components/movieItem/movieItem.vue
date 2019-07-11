@@ -74,7 +74,7 @@ export default {
 
         // open modal
         if (storage.createMoviePopup) {
-          storage.moviePath = '/movie/' + id;
+          storage.moviePath = '/movie/' + this.id;
           history.pushState({ popup: true }, null, storage.moviePath);
           storage.createMoviePopup = false;
         }
