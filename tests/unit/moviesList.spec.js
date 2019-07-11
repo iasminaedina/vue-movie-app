@@ -1,5 +1,4 @@
-// Import Vue and the component being tested
-import Vue from 'vue';
+
 import { expect } from 'chai';
 import MoviesList from '@/components/moviesList/moviesList.vue';
 
@@ -8,27 +7,6 @@ import MoviesList from '@/components/moviesList/moviesList.vue';
 describe('MoviesList', () => {
   // Inspect the raw component options
   it('has a created hook', () => {
-    expect(typeof MyComponent.created).toBe('function')
-  })
-
-  // Evaluate the results of functions in
-  // the raw component options
-  it('sets the correct default data', () => {
-    expect(typeof MyComponent.data).toBe('function')
-    const defaultData = MyComponent.data()
-    expect(defaultData.message).toBe('hello!')
-  })
-
-  // Inspect the component instance on mount
-  it('correctly sets the message when created', () => {
-    const vm = new Vue(MyComponent).$mount()
-    expect(vm.message).toBe('bye!')
-  })
-
-  // Mount an instance and inspect the render output
-  it('renders the correct message', () => {
-    const Constructor = Vue.extend(MyComponent)
-    const vm = new Constructor().$mount()
-    expect(vm.$el.textContent).toBe('bye!')
-  })
-})
+    expect(typeof MoviesList.created).toBe('function');
+  });
+});
