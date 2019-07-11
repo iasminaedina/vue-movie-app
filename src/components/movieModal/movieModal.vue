@@ -1,7 +1,7 @@
 <template>
   <div
     class="modal is-active"
-    @click="$emit('close')"
+    v-on:click="closeModal"
   >
     <div @click.stop>
       <div class="modal-background"></div>
@@ -15,7 +15,7 @@
     <button
       class="modal-close is-large"
       aria-label="close"
-      @click="$emit('close')"
+      v-on:click="closeModal"
     >
     </button>
   </div>
@@ -27,6 +27,12 @@
   export default {
     props: ['id'],
     components: { MovieItem },
+
+    methods: {
+      closeModal(e) {
+        this.$emit('close');
+      }
+    },
 
     created(){
       //close modal when pressing escape

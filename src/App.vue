@@ -6,7 +6,7 @@
 
     <section class="main">
       <transition name="fade">
-        <router-view name="list-router-view" :mode="'collection'" :key="$route.params.category"></router-view>
+        <router-view name="popular-list-router-view" :mode="'popular'" :key="$route.params.category"></router-view>
         <router-view name="search-router-view" :mode="'search'" :key="$route.params.query"></router-view>
         <router-view></router-view>
       </transition>

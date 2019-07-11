@@ -53,11 +53,10 @@
       },
       request() {
         //check mode and make appropriate request for movie list
-        if (this.mode == 'search') {
+        if (this.mode === 'search') {
           return `/search/movie?api_key=${storage.apiKey}&language=en-US&query=${this.query}&page=1`;
-        } else if (this.mode == 'collection') {
-          const category = this.$route.params.category || this.category;
-          return `/movie/${category}?api_key=${storage.apiKey}&language=en-US&page=1`;
+        } else if (this.mode === 'popular') {
+          return `/movie/${this.mode}?api_key=${storage.apiKey}&language=en-US&page=1`;
         }
       },
     },
@@ -85,7 +84,6 @@
           if (ids.length > 0) {
             this.results = ids.length;
             let favorites = [];
-
             //loop through favorites localStorage ids and get movies
             ids.forEach(function(id, key) {
               axios.get(`/movie/${id}?api_key=${storage.apiKey}&language=en-US`)
@@ -106,16 +104,15 @@
     },
     created () {
       //check mode and get title for list
-      if (this.mode == 'search'){
+      if (this.mode === 'search'){
         this.fetchCategory();
         this.listTitle = storage.categories['search'];
         eventHub.$emit('setSearchQuery');
-      } else if (this.mode == 'collection') {
+      } else if (this.mode === 'popular') {
         this.fetchCategory();
-        let category = this.$route.params.category || this.category;
-        this.listTitle = storage.categories[category];
-      } else if (this.mode == 'favorite') {
-        this.listTitle = storage.categories['favorite'];
+        this.listTitle = storage.categories[this.mode];
+      } else if (this.mode === 'favorite') {
+        this.listTitle = storage.categories[this.mode];
         this.fetchFavorites();
       }
     }

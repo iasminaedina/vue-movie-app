@@ -28,7 +28,7 @@ const storage = {
 };
 
 // category title
-storage.listTypes.forEach(function(listType) {
+storage.listTypes.forEach(function (listType) {
   storage.categories[listType.query] = listType.title;
 });
 

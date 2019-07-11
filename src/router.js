@@ -15,7 +15,7 @@ const routes = [
     path: '/movies/:category',
     name: 'movies',
     component: {
-      'list-router-view': MoviesList,
+      'popular-list-router-view': MoviesList,
     },
   },
   {
