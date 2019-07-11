@@ -100,12 +100,6 @@ export default {
       }
     },
   },
-  watch: {
-    // watch if route params change and fetch correct list
-    query(value) {
-      this.fetchCategory(value);
-    },
-  },
   created() {
     // check mode and get title for list
     if (this.mode === 'search') {

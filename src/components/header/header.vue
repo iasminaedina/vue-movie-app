@@ -78,43 +78,44 @@
 </template>
 
 <script>
-  export default {
-    data() {
-      return{
-        searchQuery: '',
+
+export default {
+  data() {
+    return {
+      searchQuery: '',
+    };
+  },
+  computed: {
+    // encode search query
+    queryForRouter() {
+      return encodeURI(this.searchQuery.replace(/ /g, '+'));
+    },
+  },
+  methods: {
+    // search functions
+    search() {
+      if (!this.searchQuery.length) return;
+      // add search query to router
+      this.$router.push({ name: 'search', params: { query: this.queryForRouter } });
+    },
+    setSearchQuery(clear) {
+      if (clear) {
+        this.searchQuery = '';
+      } else {
+        const query = decodeURIComponent(this.$route.params.query);
+        this.searchQuery = query ? query.replace(/\+/g, ' ') : '';
       }
     },
-    computed: {
-      //encode search query
-      queryForRouter(){
-        return encodeURI(this.searchQuery.replace(/ /g, "+"));
-      }
+    // show/hide mobile navigation
+    toggleNavBurger() {
+      document.querySelector('.navbar-burger').classList.toggle('is-active');
+      document.querySelector('.navbar-menu').classList.toggle('is-active');
     },
-    methods: {
-      // search functions
-      search(){
-        if(!this.searchQuery.length) return;
-        //add search query to router
-        this.$router.push({ name: 'search', params: { query: this.queryForRouter }});
-      },
-      setSearchQuery(clear){
-        if (clear){
-          this.searchQuery = '';
-        } else {
-          let query = decodeURIComponent(this.$route.params.query);
-          this.searchQuery = query ? query.replace(/\+/g, " ") : '';
-        }
-      },
-      //show/hide mobile navigation
-      toggleNavBurger() {
-        document.querySelector('.navbar-burger').classList.toggle('is-active');
-        document.querySelector('.navbar-menu').classList.toggle('is-active');
-      }
-    },
-    created() {
-      eventHub.$on('setSearchQuery', this.setSearchQuery);
-    }
-  };
+  },
+  created() {
+    eventHub.$on('setSearchQuery', this.setSearchQuery);
+  },
+};
 </script>
 
 <style scoped lang="scss">

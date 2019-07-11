@@ -5,11 +5,11 @@
 </template>
 
 <script>
-  import MovieItem from '../../components/movieItem/movieItem.vue';
+import MovieItem from '@/components/movieItem/movieItem.vue';
 
-  export default {
-    components: { MovieItem },
-  }
+export default {
+  components: { MovieItem },
+};
 </script>
 
 <style scoped>
@@ -17,4 +17,3 @@
     height: 900px;
   }
 </style>
-

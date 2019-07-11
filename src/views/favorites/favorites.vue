@@ -5,17 +5,17 @@
 </template>
 
 <script>
-  import storage from '../../storage.js';
-  import MoviesList from '../../components/moviesList/moviesList.vue';
+import storage from '../../storage';
+import MoviesList from '@/components/moviesList/moviesList.vue';
 
-  export default {
-    components: { MoviesList },
+export default {
+  components: { MoviesList },
 
-    created () {
-      document.title = 'Favorite Movies';
-      storage.backTitle = document.title;
-    }
-  }
+  created() {
+    document.title = 'Favorite Movies';
+    storage.backTitle = document.title;
+  },
+};
 </script>
 
 <style scoped>
@@ -23,4 +23,3 @@
     height: 900px;
   }
 </style>
-

@@ -18,6 +18,7 @@
     @media (max-width: 768px) {
       height: 90px;
     }
+    margin-top: 80px;
   }
   .content {
     padding-left: 20px;

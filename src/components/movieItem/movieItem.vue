@@ -17,7 +17,7 @@
 
           <div class="genre-subtitle uppercase">
             <span class="blue-color">Genre: </span>
-            <span v-for="genre in movie.genres"> {{ genre.name }} </span>
+            <span v-for="genre in movie.genres" v-bind:key="genre.name"> {{ genre.name }} </span>
           </div>
 
           <p class="subtitle uppercase">
@@ -50,81 +50,88 @@
 </template>
 
 <script>
-  import axios from 'axios';
-  import storage from '../../storage';
+import axios from 'axios';
+import storage from '../../storage';
 
-  export default {
-    props: ['id'],
-    data(){
-      return {
-        movie: {},
-        movieBackdropSrc: '',
-        favoriteChecked: false,
-      }
-    },
-    methods: {
-      //get movie
-      fetchMovie(id) {
-        axios.get(`/movie/${id}?api_key=${storage.apiKey}&language=en-US`)
-        .then(function(resp) {
-          this.movie = resp.data;
+export default {
+  props: ['id'],
+  data() {
+    return {
+      movie: {},
+      movieBackdropSrc: '',
+      favoriteChecked: false,
+    };
+  },
+  methods: {
+    // get movie
+    fetchMovie(id) {
+      axios.get(`/movie/${id}?api_key=${storage.apiKey}&language=en-US`)
+      .then(function (resp) {
+        this.movie = resp.data;
 
-          this.backdrop();
-          this.checkIfFavorite();
+        this.backdrop();
+        this.checkIfFavorite();
 
-          //open modal
-          if (storage.createMoviePopup){
-            storage.moviePath = '/movie/' + id;
-            history.pushState({ popup: true }, null, storage.moviePath);
-            storage.createMoviePopup = false;
-          }
+        // open modal
+        if (storage.createMoviePopup) {
+          storage.moviePath = '/movie/' + id;
+          history.pushState({ popup: true }, null, storage.moviePath);
+          storage.createMoviePopup = false;
+        }
 
-          //change page title to movie title
-          document.title = this.movie.title;
-        }.bind(this))
-        .catch(function(error) {
-          //show 404 page
+        // change page title to movie title
+        document.title = this.movie.title;
+      }.bind(this))
+        .catch(function (error) {
+          console.log(error);
+          // show 404 page
           this.$router.push({ name: '404' });
         }.bind(this));
-      },
-      //set image backdrop
-      backdrop(){
-        if (this.movie.backdrop_path) {
-          this.movieBackdropSrc = 'http://image.tmdb.org/t/p/w500' + this.movie.backdrop_path;
-        }
-      },
-      //check if movie is added to favorites
-      checkIfFavorite() {
-        let favorites = JSON.parse(localStorage.getItem('favorites'));
+    },
+    // set image backdrop
+    backdrop() {
+      if (this.movie.backdrop_path) {
+        this.movieBackdropSrc = 'http://image.tmdb.org/t/p/w500' + this.movie.backdrop_path;
+      }
+    },
+    // check if movie is added to favorites
+    checkIfFavorite() {
+      const favorites = JSON.parse(localStorage.getItem('favorites'));
 
-        if (favorites.find(fav => fav == this.movie.id)) {
-          this.favoriteChecked = true;
-        } else  {
-          this.favoriteChecked = false;
-        }
-      },
-      //favorite/unfavorite methods
-      setFavorite() {
-        let favorites = JSON.parse(localStorage.getItem('favorites')) || [];
-        favorites.push(this.movie.id);
-        localStorage.setItem('favorites', JSON.stringify(favorites));
+      if (favorites.find(fav => fav === this.movie.id)) {
         this.favoriteChecked = true;
-      },
-      unsetFavorite() {
-        let favorites = JSON.parse(localStorage.getItem('favorites'));
-        for ( var i = 0; i < favorites.length; i++){ 
-          if ( favorites[i] === this.movie.id) {
-            favorites.splice(i, 1); 
-          }
-        }
-        localStorage.setItem('favorites', JSON.stringify(favorites));
+      } else {
         this.favoriteChecked = false;
       }
     },
-    created () {
-      this.fetchMovie(this.id);
-    }
-  }
+    // favorite/unfavorite methods
+    setFavorite() {
+      const favorites = JSON.parse(localStorage.getItem('favorites')) || [];
+      favorites.push(this.movie.id);
+      localStorage.setItem('favorites', JSON.stringify(favorites));
+      this.favoriteChecked = true;
+
+      // show toast notification for confirmation
+      this.$toasted.global.myToast(`${this.movie.title} added to favorites!`);
+    },
+    unsetFavorite() {
+      const favorites = JSON.parse(localStorage.getItem('favorites'));
+      for (let i = 0; i < favorites.length; i++) {
+        if (favorites[i] === this.movie.id) {
+          favorites.splice(i, 1);
+        }
+      }
+      localStorage.setItem('favorites', JSON.stringify(favorites));
+      this.favoriteChecked = false;
+
+      // show toast notification for confirmation
+      this.$toasted.global.myToast(`${this.movie.title} removed from favorites!`);
+    },
+  },
+  created() {
+    this.fetchMovie(this.id);
+  },
+};
 </script>
 
 <style scoped>
@@ -158,5 +165,8 @@
   }
   .genre-subtitle {
     font-size: 12px;
+  }
+  .toastStyle {
+    background-color: #00d1b2;
   }
 </style>

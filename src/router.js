@@ -1,9 +1,9 @@
 import Router from 'vue-router';
-import Dashboard from './views/dashboard/dashboard.vue';
-import Favorites from './views/favorites/favorites.vue';
-import MoviePage from './views/moviePage/moviePage.vue';
-import MoviesList from './components/moviesList/moviesList.vue';
-import NotFound from './views/404/404.vue';
+import Dashboard from '@/views/dashboard/dashboard.vue';
+import Favorites from '@/views/favorites/favorites.vue';
+import MoviePage from '@/views/moviePage/moviePage.vue';
+import MoviesList from '@/components/moviesList/moviesList.vue';
+import NotFound from '@/views/404/404.vue';
 
 const routes = [
   {
